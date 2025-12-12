@@ -15,7 +15,7 @@ export default function ModulePage() {
   const router = useRouter();
   const { address: connectedAddress } = useAccount();
   const moduleId = parseInt(params.id as string);
-  const module = modules.find(m => m.id === moduleId);
+  const currentModule = modules.find(m => m.id === moduleId);
 
   const [showQuiz, setShowQuiz] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
@@ -43,10 +43,10 @@ export default function ModulePage() {
   const { writeContractAsync: submitQuiz } = useScaffoldWriteContract("ScrollAcademy");
 
   useEffect(() => {
-    if (module && !showQuiz) {
-      setSelectedAnswers(new Array(module.quiz.length).fill(-1));
+    if (currentModule && !showQuiz) {
+      setSelectedAnswers(new Array(currentModule.quiz.length).fill(-1));
     }
-  }, [module, showQuiz]);
+  }, [currentModule, showQuiz]);
 
   if (!connectedAddress) {
     return (
@@ -65,7 +65,7 @@ export default function ModulePage() {
     );
   }
 
-  if (!module) {
+  if (!currentModule) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen px-4">
         <div className="text-center space-y-4">
@@ -141,7 +141,7 @@ export default function ModulePage() {
           </Link>
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs md:text-sm font-semibold text-purple-600">Module {module.id} of 7</span>
+              <span className="text-xs md:text-sm font-semibold text-purple-600">Module {currentModule.id} of 7</span>
               {isCompleted && (
                 <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">
                   ✓ Completed
@@ -149,8 +149,8 @@ export default function ModulePage() {
               )}
             </div>
             <h1 className="text-2xl md:text-4xl font-bold text-gray-900 flex items-center gap-3">
-              <span className="text-3xl md:text-4xl">{module.emoji}</span>
-              <span className="break-words">{module.title}</span>
+              <span className="text-3xl md:text-4xl">{currentModule.emoji}</span>
+              <span className="break-words">{currentModule.title}</span>
             </h1>
           </div>
         </div>
@@ -163,28 +163,28 @@ export default function ModulePage() {
               <div className="prose prose-sm md:prose-lg max-w-none">
                 <ReactMarkdown
                   components={{
-                    h1: ({ node, ...props }) => (
+                    h1: ({ ...props }) => (
                       <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4" {...props} />
                     ),
-                    h2: ({ node, ...props }) => (
+                    h2: ({ ...props }) => (
                       <h2 className="text-xl md:text-2xl font-bold text-gray-900 mt-6 mb-3" {...props} />
                     ),
-                    h3: ({ node, ...props }) => (
+                    h3: ({ ...props }) => (
                       <h3 className="text-lg md:text-xl font-bold text-gray-900 mt-4 mb-2" {...props} />
                     ),
-                    p: ({ node, ...props }) => (
+                    p: ({ ...props }) => (
                       <p className="text-sm md:text-base text-gray-700 mb-4 leading-relaxed" {...props} />
                     ),
-                    ul: ({ node, ...props }) => (
+                    ul: ({ ...props }) => (
                       <ul className="list-disc list-inside space-y-2 mb-4 text-sm md:text-base" {...props} />
                     ),
-                    ol: ({ node, ...props }) => (
+                    ol: ({ ...props }) => (
                       <ol className="list-decimal list-inside space-y-2 mb-4 text-sm md:text-base" {...props} />
                     ),
-                    strong: ({ node, ...props }) => <strong className="font-bold text-gray-900" {...props} />,
+                    strong: ({ ...props }) => <strong className="font-bold text-gray-900" {...props} />,
                   }}
                 >
-                  {module.content}
+                  {currentModule.content}
                 </ReactMarkdown>
               </div>
             </div>
@@ -215,7 +215,7 @@ export default function ModulePage() {
               </div>
 
               <div className="space-y-6 md:space-y-8">
-                {module.quiz.map((question, qIndex) => (
+                {currentModule.quiz.map((question, qIndex) => (
                   <div key={qIndex} className="p-4 md:p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl">
                     <h3 className="text-base md:text-lg font-bold text-gray-900 mb-4">
                       {qIndex + 1}. {question.question}
@@ -274,7 +274,7 @@ export default function ModulePage() {
                   <CheckCircleIcon className="w-12 h-12 md:w-16 md:h-16 text-green-600 mx-auto mb-2" />
                   <h3 className="text-lg md:text-xl font-bold text-green-800 mb-1">Congratulations! 🎉</h3>
                   <p className="text-sm md:text-base text-green-700">
-                    You've completed this module. Redirecting to modules...
+                    You&apos;ve completed this module. Redirecting to modules...
                   </p>
                 </div>
               )}
@@ -289,7 +289,7 @@ export default function ModulePage() {
                     onClick={() => {
                       setShowQuiz(false);
                       setQuizResult(null);
-                      setSelectedAnswers(new Array(module.quiz.length).fill(-1));
+                      setSelectedAnswers(new Array(currentModule.quiz.length).fill(-1));
                     }}
                     className="px-6 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 text-sm md:text-base"
                   >

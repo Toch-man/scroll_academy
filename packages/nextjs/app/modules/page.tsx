@@ -202,7 +202,7 @@ export default function ModulesPage() {
           <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-2xl shadow-xl p-6 md:p-8 text-center text-white">
             <h3 className="text-2xl md:text-3xl font-bold mb-2">🎉 Congratulations, Grandmaster!</h3>
             <p className="text-sm md:text-base mb-4">
-              You've completed all modules and earned your soulbound NFT badge!
+              You&apos;ve completed all modules and earned your soulbound NFT badge!
             </p>
             <Link
               href="/badge"

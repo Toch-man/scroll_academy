@@ -78,7 +78,7 @@ export default function Home() {
       {/* Features Section */}
       <div className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">What You'll Learn</h2>
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">What You will Learn</h2>
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Feature 1 */}
@@ -132,7 +132,9 @@ export default function Home() {
       <div className="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h2 className="text-4xl md:text-5xl font-bold">Ready to Become a Scroll Grandmaster?</h2>
-          <p className="text-xl opacity-90">Complete all 7 modules and earn your soulbound NFT badge. Let's go! 🎓</p>
+          <p className="text-xl opacity-90">
+            Complete all 7 modules and earn your soulbound NFT badge. Let&apos;s go! 🎓
+          </p>
           {connectedAddress ? (
             <Link
               href="/modules"
