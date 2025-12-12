@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { useScaffoldReadContract, useScaffoldWriteContract } from "../../../hooks/scaffold-eth";
+import { modules } from "../../../utils/data/moduleContent";
 import ReactMarkdown from "react-markdown";
 import { useAccount } from "wagmi";
 import { ArrowLeftIcon, ArrowRightIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
-import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
-import { modules } from "~~/utils/data/moduleContent";
 
 export default function ModulePage() {
   const params = useParams();
