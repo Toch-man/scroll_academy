@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
+import { useScaffoldReadContract } from "../../hooks/scaffold-eth";
+import { modules } from "../../utils/data/moduleContent";
 import { useAccount } from "wagmi";
 import { CheckCircleIcon, LockClosedIcon, PlayCircleIcon } from "@heroicons/react/24/solid";
-import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
-import { modules } from "~~/utils/data/moduleContent";
 
 export default function ModulesPage() {
   const { address: connectedAddress } = useAccount();
