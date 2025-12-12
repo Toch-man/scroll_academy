@@ -1,81 +1,152 @@
 "use client";
 
 import Link from "next/link";
-import { Address } from "@scaffold-ui/components";
-import type { NextPage } from "next";
-import { hardhat } from "viem/chains";
 import { useAccount } from "wagmi";
-import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth";
+import { AcademicCapIcon, RocketLaunchIcon, SparklesIcon } from "@heroicons/react/24/outline";
 
-const Home: NextPage = () => {
+export default function Home() {
   const { address: connectedAddress } = useAccount();
-  const { targetNetwork } = useTargetNetwork();
 
   return (
-    <>
-      <div className="flex items-center flex-col grow pt-10">
-        <div className="px-5">
-          <h1 className="text-center">
-            <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
-          </h1>
-          <div className="flex justify-center items-center space-x-2 flex-col">
-            <p className="my-2 font-medium">Connected Address:</p>
-            <Address
-              address={connectedAddress}
-              chain={targetNetwork}
-              blockExplorerAddressLink={
-                targetNetwork.id === hardhat.id ? `/blockexplorer/address/${connectedAddress}` : undefined
-              }
-            />
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Section */}
+      <div className="flex-grow flex flex-col items-center justify-center px-4 py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="max-w-4xl mx-auto text-center space-y-8">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 rounded-full text-purple-700 font-medium text-sm">
+            <SparklesIcon className="w-4 h-4" />
+            Learn. Build. Earn NFT Badge.
           </div>
 
-          <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/app/page.tsx
-            </code>
-          </p>
-          <p className="text-center text-lg">
-            Edit your smart contract{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              YourContract.sol
-            </code>{" "}
-            in{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
-            </code>
-          </p>
-        </div>
+          {/* Main Heading */}
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 leading-tight">
+            Master{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Scroll</span>{" "}
+            in 7 Modules
+          </h1>
 
-        <div className="grow bg-base-300 w-full mt-16 px-8 py-12">
-          <div className="flex justify-center items-center gap-12 flex-col md:flex-row">
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <BugAntIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Tinker with your smart contract using the{" "}
-                <Link href="/debug" passHref className="link">
-                  Debug Contracts
-                </Link>{" "}
-                tab.
-              </p>
+          {/* Subheading */}
+          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
+            Learn about blockchain, Layer 2s, and ZK-Rollups. Complete all modules and earn a unique Grandmaster NFT
+            badge.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+            {connectedAddress ? (
+              <Link
+                href="/modules"
+                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold text-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center gap-2"
+              >
+                <RocketLaunchIcon className="w-6 h-6" />
+                Start Learning
+              </Link>
+            ) : (
+              <div className="px-8 py-4 bg-gray-200 text-gray-500 rounded-lg font-semibold text-lg flex items-center gap-2 cursor-not-allowed">
+                <RocketLaunchIcon className="w-6 h-6" />
+                Connect Wallet to Start
+              </div>
+            )}
+
+            <Link
+              href="/badge"
+              className="px-8 py-4 bg-white text-gray-800 rounded-lg font-semibold text-lg border-2 border-gray-300 hover:border-purple-500 transition-all duration-300 flex items-center gap-2"
+            >
+              <AcademicCapIcon className="w-6 h-6" />
+              View My Badge
+            </Link>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-8 pt-12 max-w-3xl mx-auto">
+            <div className="text-center">
+              <div className="text-4xl font-bold text-purple-600">7</div>
+              <div className="text-gray-600 mt-2">Modules</div>
             </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Explore your local transactions with the{" "}
-                <Link href="/blockexplorer" passHref className="link">
-                  Block Explorer
-                </Link>{" "}
-                tab.
-              </p>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-blue-600">28</div>
+              <div className="text-gray-600 mt-2">Quiz Questions</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-green-600">1</div>
+              <div className="text-gray-600 mt-2">NFT Badge</div>
             </div>
           </div>
         </div>
       </div>
-    </>
-  );
-};
 
-export default Home;
+      {/* Features Section */}
+      <div className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">What You'll Learn</h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Feature 1 */}
+            <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-4">🔗</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Blockchain Basics</h3>
+              <p className="text-gray-600">
+                Understand decentralization, blockchain technology, and why it matters for the future.
+              </p>
+            </div>
+
+            {/* Feature 2 */}
+            <div className="p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-4">⚡</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Layer 2 Solutions</h3>
+              <p className="text-gray-600">Learn how L2s scale Ethereum with lower fees and faster transactions.</p>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-4">🔐</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">ZK-Rollups & Scroll</h3>
+              <p className="text-gray-600">Master zero-knowledge proofs and discover what makes Scroll unique.</p>
+            </div>
+
+            {/* Feature 4 */}
+            <div className="p-6 bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-4">👛</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Wallet Setup</h3>
+              <p className="text-gray-600">Create your first crypto wallet and add Scroll network to MetaMask.</p>
+            </div>
+
+            {/* Feature 5 */}
+            <div className="p-6 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-4">🌉</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Bridging Assets</h3>
+              <p className="text-gray-600">Learn to safely bridge assets between Ethereum and Scroll.</p>
+            </div>
+
+            {/* Feature 6 */}
+            <div className="p-6 bg-gradient-to-br from-red-50 to-red-100 rounded-xl hover:shadow-lg transition-shadow">
+              <div className="text-4xl mb-4">🚀</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Deploy Contracts</h3>
+              <p className="text-gray-600">Deploy your first smart contract on Scroll network like a pro.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <h2 className="text-4xl md:text-5xl font-bold">Ready to Become a Scroll Grandmaster?</h2>
+          <p className="text-xl opacity-90">Complete all 7 modules and earn your soulbound NFT badge. Let's go! 🎓</p>
+          {connectedAddress ? (
+            <Link
+              href="/modules"
+              className="inline-block px-10 py-4 bg-white text-purple-600 rounded-lg font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 mt-4"
+            >
+              Begin Your Journey →
+            </Link>
+          ) : (
+            <div className="inline-block px-10 py-4 bg-gray-300 text-gray-500 rounded-lg font-bold text-lg cursor-not-allowed mt-4">
+              Connect Wallet to Begin
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
