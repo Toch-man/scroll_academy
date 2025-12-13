@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   534351: {
     ScrollAcademy: {
-      address: "0x6E0af415e9c535311970b304F7FB78fA4C9728a6",
+      address: "0xC77685a8c8893884208A7840054244Ee9657a840",
       abi: [
         {
           inputs: [
@@ -184,9 +184,9 @@ const deployedContracts = {
               type: "string",
             },
             {
-              internalType: "bytes32",
-              name: "quizAnswerHash",
-              type: "bytes32",
+              internalType: "uint256[]",
+              name: "correctAnswers",
+              type: "uint256[]",
             },
           ],
           name: "addModule",
@@ -303,6 +303,11 @@ const deployedContracts = {
               type: "string",
             },
             {
+              internalType: "uint256[]",
+              name: "correctAnswers",
+              type: "uint256[]",
+            },
+            {
               internalType: "bool",
               name: "active",
               type: "bool",
@@ -412,11 +417,6 @@ const deployedContracts = {
               internalType: "string",
               name: "description",
               type: "string",
-            },
-            {
-              internalType: "bytes32",
-              name: "quizAnswerHash",
-              type: "bytes32",
             },
             {
               internalType: "bool",
@@ -713,9 +713,9 @@ const deployedContracts = {
               type: "uint256",
             },
             {
-              internalType: "bytes32",
-              name: "newAnswerHash",
-              type: "bytes32",
+              internalType: "uint256[]",
+              name: "newAnswers",
+              type: "uint256[]",
             },
           ],
           name: "updateModuleAnswers",
@@ -770,7 +770,7 @@ const deployedContracts = {
         renounceOwnership: "@openzeppelin/contracts/access/Ownable.sol",
         transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
       },
-      deployedOnBlock: 15459966,
+      deployedOnBlock: 15471174,
     },
   },
 } as const;

@@ -16,7 +16,7 @@ contract ScrollAcademy is ERC721, Ownable {
     struct Module {
         string title;
         string description;
-        bytes32 quizAnswerHash; // Hash of correct answers
+        uint256[] correctAnswers; // Just store the answer indices directly!
         bool active;
     }
 
@@ -50,18 +50,18 @@ contract ScrollAcademy is ERC721, Ownable {
      * @dev Add a new learning module (only owner)
      * @param title Module title
      * @param description Module description  
-     * @param quizAnswerHash Hash of quiz answers (keccak256 of sorted answers)
+     * @param correctAnswers Array of correct answer indices
      */
     function addModule(
         string memory title,
         string memory description,
-        bytes32 quizAnswerHash
+        uint256[] memory correctAnswers
     ) external onlyOwner {
         totalModules++;
         modules[totalModules] = Module({
             title: title,
             description: description,
-            quizAnswerHash: quizAnswerHash,
+            correctAnswers: correctAnswers,
             active: true
         });
         
@@ -69,11 +69,11 @@ contract ScrollAcademy is ERC721, Ownable {
     }
 
     /**
-     * @dev Update module quiz answer hash
+     * @dev Update module quiz answers
      */
-    function updateModuleAnswers(uint256 moduleId, bytes32 newAnswerHash) external onlyOwner {
+    function updateModuleAnswers(uint256 moduleId, uint256[] memory newAnswers) external onlyOwner {
         require(moduleId > 0 && moduleId <= totalModules, "Invalid module");
-        modules[moduleId].quizAnswerHash = newAnswerHash;
+        modules[moduleId].correctAnswers = newAnswers;
     }
 
     /**
@@ -102,9 +102,13 @@ contract ScrollAcademy is ERC721, Ownable {
             );
         }
 
-        // Verify answers
-        bytes32 submittedHash = keccak256(abi.encodePacked(answers));
-        require(submittedHash == modules[moduleId].quizAnswerHash, "Incorrect answers");
+        // Verify answers - Simple array comparison!
+        uint256[] memory correctAnswers = modules[moduleId].correctAnswers;
+        require(answers.length == correctAnswers.length, "Wrong number of answers");
+        
+        for (uint256 i = 0; i < answers.length; i++) {
+            require(answers[i] == correctAnswers[i], "Incorrect answers");
+        }
 
         // Mark module as completed
         userProgress[msg.sender].moduleCompleted[moduleId] = true;
@@ -173,16 +177,17 @@ contract ScrollAcademy is ERC721, Ownable {
     }
 
     /**
-     * @dev Get module details
+     * @dev Get module details including correct answers (for debugging)
      */
     function getModule(uint256 moduleId) external view returns (
         string memory title,
         string memory description,
+        uint256[] memory correctAnswers,
         bool active
     ) {
         require(moduleId > 0 && moduleId <= totalModules, "Invalid module");
         Module memory m = modules[moduleId];
-        return (m.title, m.description, m.active);
+        return (m.title, m.description, m.correctAnswers, m.active);
     }
 
     /**

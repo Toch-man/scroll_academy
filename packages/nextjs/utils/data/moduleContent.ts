@@ -471,7 +471,7 @@ Scroll isn't just another L2 - it's a commitment to scaling Ethereum the right w
           "It's cheaper than all other chains",
           "It doesn't use Ethereum",
         ],
-        correctAnswer: 1,
+        correctAnswer: 2,
       },
     ],
   },
@@ -811,7 +811,7 @@ Congratulations! You're now ready to experience Ethereum's power at Layer 2 spee
       },
       {
         question: "How long does it typically take to bridge FROM Scroll TO Ethereum?",
-        options: ["Instant", "10-15 minutes", "~4 hours", "7 days"],
+        options: ["Instant", "~4 hours", "10-15 minutes", "7 days"],
         correctAnswer: 2,
       },
       {
