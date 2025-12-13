@@ -104,6 +104,7 @@ export default function ModulePage() {
     setSelectedAnswers(newAnswers);
   };
 
+  // In your handleSubmitQuiz function
   const handleSubmitQuiz = async () => {
     // Check if all questions are answered
     if (selectedAnswers.some(answer => answer === -1)) {
@@ -111,13 +112,17 @@ export default function ModulePage() {
       return;
     }
 
+    // Convert answers to numbers and ensure they match the expected format
+    // Your quiz data uses 0-based indexing, so this should be correct
+    const answerIndices = selectedAnswers.map(a => a);
+
     setIsSubmitting(true);
     setQuizResult(null);
 
     try {
       await submitQuiz({
         functionName: "submitQuiz",
-        args: [BigInt(moduleId), selectedAnswers.map(a => BigInt(a))],
+        args: [BigInt(moduleId), answerIndices.map(a => BigInt(a))],
       });
 
       setQuizResult("success");
@@ -126,6 +131,20 @@ export default function ModulePage() {
       }, 3000);
     } catch (error: any) {
       console.error("Quiz submission error:", error);
+
+      // More detailed error logging
+      if (error.message?.includes("Incorrect answers")) {
+        console.log("Submitted answers:", answerIndices);
+        console.log(
+          "Expected correct answers:",
+          currentModule.quiz.map(q => q.correctAnswer),
+        );
+
+        // Check if they match
+        const isCorrect = answerIndices.every((answer, index) => answer === currentModule.quiz[index].correctAnswer);
+        console.log("Answers match expected?", isCorrect);
+      }
+
       setQuizResult("error");
       setIsSubmitting(false);
     }

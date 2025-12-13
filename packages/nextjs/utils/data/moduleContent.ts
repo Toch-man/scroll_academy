@@ -1,7 +1,7 @@
 export interface QuizQuestion {
   question: string;
   options: string[];
-  correctAnswer: number; // index of correct option
+  correctAnswer: number; // index of correct option (0-based)
 }
 
 export interface Module {
@@ -456,7 +456,7 @@ Scroll isn't just another L2 - it's a commitment to scaling Ethereum the right w
           "Scroll is faster than Ethereum",
           "Scroll replaces Ethereum",
         ],
-        correctAnswer: 0,
+        correctAnswer: 1,
       },
       {
         question: "How long is the withdrawal period on Scroll?",
@@ -471,7 +471,7 @@ Scroll isn't just another L2 - it's a commitment to scaling Ethereum the right w
           "It's cheaper than all other chains",
           "It doesn't use Ethereum",
         ],
-        correctAnswer: 2,
+        correctAnswer: 1,
       },
     ],
   },
@@ -945,7 +945,26 @@ Verified contracts show their source code publicly and build trust.
 **Issue: "Gas estimation failed"**
 - Solution: Check your contract for errors, try increasing gas limit
 
-**Issue: "Contract verification`,
+**Issue: "Contract verification failed"**
+- Solution: Ensure compiler version matches, flatten your contract if using imports
+
+## What's Next?
+
+After deploying your contract:
+1. Test all functions thoroughly
+2. Verify on ScrollScan for transparency
+3. Build a frontend to interact with it
+4. Share with the Scroll community
+5. Monitor contract activity
+
+Congratulations! You've completed the Scroll Academy. You now have the knowledge to:
+- Understand blockchain and Layer 2 technology
+- Use ZK Rollups and Scroll confidently
+- Create wallets and bridge assets safely
+- Deploy smart contracts to Scroll
+
+Welcome to the future of Ethereum scaling! 🎓🚀
+    `,
     quiz: [
       {
         question: "What happens when you deploy a smart contract?",

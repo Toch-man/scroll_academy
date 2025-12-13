@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   534351: {
     ScrollAcademy: {
-      address: "0xE874c0e661C09a9aA9a885c2356cEb90A102ef2C",
+      address: "0x6E0af415e9c535311970b304F7FB78fA4C9728a6",
       abi: [
         {
           inputs: [
@@ -770,7 +770,7 @@ const deployedContracts = {
         renounceOwnership: "@openzeppelin/contracts/access/Ownable.sol",
         transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
       },
-      deployedOnBlock: 15445330,
+      deployedOnBlock: 15459966,
     },
   },
 } as const;
